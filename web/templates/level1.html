@@ -1,0 +1,66 @@
+{% extends "_base.html" %}
+
+{% block content %}
+    <h1>Hello World</h1>
+    <style type="text/css" media="screen">
+        #editor {
+            width: 100%;
+            margin: 0px auto;
+            height: 300px;
+        }
+    </style>
+
+    <div class="text-center">
+        <div id="editor"># your code here
+print "hello world"
+        </div>
+        <br/>
+        <div id="error" class="panel panel-danger hidden"></div>
+        <div id="success" class="panel panel-info" style=" padding: 10px; ">
+            Congratulation! Now you become a <b>Python Ninja</b>.
+           <a class="btn btn-info" href="/badge" style=" padding: 2px 7px; ">Get your badge &rarr;</a>
+        </div>
+        <br/>
+        <button id="submit-code" class="btn btn-info">Run</button>
+    </div>
+    <script src="static/components/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/python");
+        function init(){
+            $("#error").addClass("hidden");
+            $("#success").addClass("hidden");
+        }
+        function show_error(error){
+            $("#error").text(error);
+            $("#error").removeClass("hidden");
+        }
+
+        function show_success(){
+            $("#success").removeClass("hidden");
+        }
+        $("#submit-code").click(function () {
+            init();
+            var code = editor.getValue();
+            var data = {"code": code};
+            $.ajax({
+                type: "POST",
+                url: "http://192.168.1.28:5000/execute",
+                data: JSON.stringify(data),
+                contentType: 'application/json'
+            }).done(function (result) {
+                if(result.error){
+                    show_error(result.error);
+                } else {
+                    show_success();
+                }
+                console.log(result)
+            }).fail(function () {
+            });
+        })
+    </script>
+
+{% endblock %}
+
