@@ -1,8 +1,11 @@
-import json
+from __future__ import with_statement
+import traceback
 from flask import Flask, render_template, request
 import os
 import flask
 from IPython.utils.capture import capture_output
+
+from manager import time_limit, TimeoutException
 
 app = Flask(__name__)
 
@@ -16,6 +19,7 @@ def hello():
 def level1():
     return render_template("level1.html")
 
+
 @app.route('/level2')
 def level2():
     return render_template("level2.html")
@@ -25,28 +29,37 @@ def level2():
 def badge():
     return render_template("badge.html")
 
+
 levels_flow = {
     "level1": "level2",
     "level2": "graduation"
 }
+
+
 @app.route("/submit", methods=["POST"])
 def execute():
     try:
         problem = request.json['problem']
         code = request.json['code']
         files = os.listdir("static/levels/" + problem)
-        results = []
+        test_outputs = []
+        result = {"error": "Timeout"}
         for i in range(len(files) / 2):
-            input_file = "static/levels/%s/input%02d.txt" % (problem, i)
-            output_file = "static/levels/%s/output%02d.txt" % (problem, i)
-            expected = open(output_file).read()
-            with capture_output() as c:
-                exec code
-            actual = c.stdout
-            result = expected == actual
-            results.append(result)
-        results = all(results)
-        if results:
+            try:
+                with time_limit(1):
+                    input_file = "static/levels/%s/input%02d.txt" % (problem, i)
+                    output_file = "static/levels/%s/output%02d.txt" % (problem, i)
+                    expected = open(output_file).read()
+                    with capture_output() as c:
+                        exec code
+                    actual = c.stdout
+                    test_output = expected == actual
+                    test_outputs.append(test_output)
+            except Exception, e:
+                print "holy"
+                test_outputs.append(False)
+        test_outputs = all(test_outputs)
+        if test_outputs:
             if levels_flow[problem] == "graduation":
                 result = {
                     "graduation": "graduation"
@@ -63,7 +76,11 @@ def execute():
     except SyntaxError, e:
         result = {"error": "Syntax Error"}
     except Exception, e:
-        result = {"error": str(e)}
+        traceback.print_exc()
+        result = {
+            "error": "Runtime Error",
+            "message": str(e)
+        }
     finally:
         return flask.jsonify(**result)
 
