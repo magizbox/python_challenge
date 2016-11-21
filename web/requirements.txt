@@ -1,1 +1,2 @@
 flask
+ipython==3.2.1
