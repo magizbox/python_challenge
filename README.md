@@ -15,6 +15,7 @@ docker-compose up
 
 ## Powered By
 
-* Docker
+* Docker 1.9
+* docker-compose 1.9.0
 * Flask
 * Bootstrap 3.0
