@@ -2,26 +2,30 @@
 
 {% block content %}
 
-<div class="text-center">
-  <h1>Welcome!</h1>
-</div>
+  <div class="site-wrapper">
+    <link rel="stylesheet" href="static/index/style.css">
+    <div class="site-wrapper-inner">
 
-<br>
+      <div class="cover-container">
 
-<form action="/" method="POST">
-  <div class="form-group">
-    <input name="text" class="form-control input-lg" type="text" placeholder="Enter a message" required>
+        <div class="inner cover">
+          <h1 class="cover-heading">Python Challenge</h1>
+          <p class="lead">Basic python challenges to guide you to python world.</p>
+          <p class="lead">
+            <a href="/level1" class="btn btn-lg btn-default">Challenge Accepted!</a>
+          </p>
+        </div>
+
+        <div class="mastfoot">
+          <div class="inner">
+            <p>Created by <a href="http://magizbox.com">Magizbox</a></p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
-  <input type="submit" class="btn btn-primary btn-lg btn-block" value="Submit">
-</form>
-
-<br>
-<hr>
-
-<div>
-  {% for post in posts %}
-    <h4 class="well"><strong>{{post.text}}</strong> - <em>{{post.date_posted.strftime('%Y-%m-%d')}}</em></h4>
-  {% endfor %}
-</div>
 
 {% endblock %}
