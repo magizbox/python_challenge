@@ -1,7 +1,8 @@
 # Python Challenge 
 
-# Powered By 
+## Powered By
 
-* docker
-* 
+* Docker
+* Flask
+* Bootstrap 3.0
 
