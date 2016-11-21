@@ -27,6 +27,8 @@ def execute():
         code = request.json['code']
         with capture_output() as c:
             exec code
+        expected = open("static/levels/1/ouput01.txt")
+        actual = c.stdout
         result = {"b": "1"}
     except SyntaxError, e:
         result = {"error": "syntax error"}
