@@ -24,6 +24,18 @@ def level1():
 def level2():
     return render_template("level2.html")
 
+@app.route('/level2_answer')
+def level2_answer():
+    return render_template("level2_answer.html")
+
+@app.route('/level3')
+def level3():
+    return render_template("level3.html")
+
+@app.route('/level3_answer')
+def level3_answer():
+    return render_template("level3_answer.html")
+
 
 @app.route('/badge')
 def badge():
@@ -32,12 +44,13 @@ def badge():
 
 levels_flow = {
     "level1": "level2",
-    "level2": "graduation"
+    "level2": "level3",
+    "level3": "graduation",
 }
 
 
 @app.route("/submit", methods=["POST"])
-def execute():
+def submit():
     try:
         problem = request.json['problem']
         code = request.json['code']
@@ -46,17 +59,15 @@ def execute():
         result = {"error": "Timeout"}
         for i in range(len(files) / 2):
             try:
-                with time_limit(1):
-                    input_file = "static/levels/%s/input%02d.txt" % (problem, i)
-                    output_file = "static/levels/%s/output%02d.txt" % (problem, i)
-                    expected = open(output_file).read()
-                    with capture_output() as c:
-                        exec code
-                    actual = c.stdout
-                    test_output = expected == actual
-                    test_outputs.append(test_output)
+                input_file = "static/levels/%s/input%02d.txt" % (problem, i)
+                output_file = "static/levels/%s/output%02d.txt" % (problem, i)
+                expected = open(output_file).read()
+                with capture_output() as c:
+                    exec code
+                actual = c.stdout
+                test_output = expected == actual
+                test_outputs.append(test_output)
             except Exception, e:
-                print "holy"
                 test_outputs.append(False)
         test_outputs = all(test_outputs)
         if test_outputs:
@@ -67,7 +78,7 @@ def execute():
             else:
                 result = {
                     "success": "success",
-                    "next": "level2"
+                    "next": levels_flow[problem]
                 }
         else:
             result = {
