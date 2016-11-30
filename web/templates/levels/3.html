@@ -1,0 +1,59 @@
+{% extends "level.html" %}
+
+{% block level_title %}
+  <h1>Operators</h1>
+{% endblock %}
+
+
+{% block level_objective %}
+  <p><b>Objective</b></p>
+  <p>In this challenge, you'll work with arithmetic operators. Check out the Tutorial tab for learning materials and an
+    instructional video!</p>
+{% endblock %}
+
+{% block level_task %}
+  <p><b>Task</b></p>
+  <p>Given the <i>meal</i> price (base cost of a meal), <i>tip percent</i> (the percentage of the <i>meal</i> price
+    being added as tip), and <i>tax percent</i> (the percentage of the <i>meal</i> price being added as tax) for a meal,
+    find and print the meal's <i>total cost.</i></p>
+{% endblock %}
+
+{% block level_input %}
+  <p><strong>Input Format</strong></p>
+  <p>There are <em>3</em> lines of numeric input:</p>
+  <ul>
+    <li>The first line has a double, <em>mealCost</em> (the cost of the meal before tax and tip).</li>
+    <li>The second line has an integer, <em>tipPercent</em> (the percentage of <em>mealCost</em> being added as tip).
+    </li>
+    <li>The third line has an integer, <em>taxPercent</em> (the percentage of <em>mealCost</em> being added as tax).
+    </li>
+  </ul>
+{% endblock %}
+
+{% block level_output %}
+  <p><strong>Output Format</strong></p>
+  <p>Print <em>The total meal cost is totalCost</em> dollars., where <em>totalCost</em> is the rounded integer result of
+    the entire bill (<em>mealCost</em> with added tax and tip).</p>
+{% endblock %}
+
+{% block level_samples %}
+  <p><strong>Sample Input</strong></p>
+  <pre>12.00
+20
+8</pre>
+  <p><strong>Sample Output</strong></p>
+  <pre>The total meal cost is 15 dollars.</pre>
+  <p><strong>Explanation</strong></p>
+  <p>Given:</p>
+  <p><em>mealCost</em>=12, <em>tipPercent</em>=20, <em>taxPercent</em>=8</p>
+  <p>Calculations:</p>
+  <p><em>tip</em>=12x20/100 = 2.4</p>
+  <p><em>tax</em>=12x8/100 = 0.96</p>
+  <p><em>totalCost</em> = <em>mealCost</em> + <em>tip</em> + <em>tax</em> = 12 + 2.4 + 0.96 = 15.36</p>
+  <p><em>round(totalCost)</em> = 15</p>
+  <p>We round totalCost to the nearest dollar (integer) and then print our result:</p>
+  <pre>The total meal cost is 15 dollars.</pre>
+{% endblock %}
+
+{% block level_code %}# your code here
+{% endblock %}

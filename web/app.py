@@ -1,11 +1,11 @@
 from __future__ import with_statement
+
+import json
 import traceback
 from flask import Flask, render_template, request
 import os
 import flask
 from IPython.utils.capture import capture_output
-
-from manager import time_limit, TimeoutException
 
 app = Flask(__name__)
 
@@ -15,31 +15,11 @@ def hello():
     return render_template("index.html")
 
 
-@app.route('/level1')
-def level1():
-    return render_template("level1.html")
-
-@app.route('/level1_answer')
-def level1_answer():
-    return render_template("level1_answer.html")
-
-
-@app.route('/level2')
-def level2():
-    return render_template("level2.html")
-
-@app.route('/level2_answer')
-def level2_answer():
-    return render_template("level2_answer.html")
-
-@app.route('/level3')
-def level3():
-    return render_template("level3.html")
-
-@app.route('/level3_answer')
-def level3_answer():
-    return render_template("level3_answer.html")
-
+@app.route('/levels/<id>')
+def show_level(id):
+    levels = json.load(open("static/levels.json"))
+    level = levels[id]
+    return render_template(level["template"], level=level)
 
 @app.route('/badge')
 def badge():

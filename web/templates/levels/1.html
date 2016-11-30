@@ -1,0 +1,49 @@
+{% extends "level.html" %}
+
+{% block level_title %}
+  <h1>Hello World</h1>
+{% endblock %}
+
+{% block level_objective %}
+  <p><b>Objective</b></p>
+  <p>In this challenge, we review some basic concepts that will get you started with this series. You will need to use
+    the same (or similar) syntax to read input and write output in challenges throughout HackerRank. Check out the
+    Tutorial tab for learning materials and an instructional video!</p>
+{% endblock %}
+
+{% block level_task %}
+  <p><b>Task</b></p>
+  <p> To complete this challenge, you must save a line of input from stdin to a variable, print Hello, World. on a
+    single line, and finally print the value of your variable on a second line.</p>
+  <p>You've got this!</p>
+{% endblock %}
+
+{% block level_input %}
+  <p><b>Input Format</b></p>
+  A single line of text denoting <code>inputString</code> (the variable whose contents must be printed).
+{% endblock %}
+
+{% block level_output %}
+  <p><strong>Output Format</strong></p>
+  <p>Print <code>Hello, World.</code> on the first line, and the contents of <em>inputString</em> on the second line.
+  </p>
+{% endblock %}
+
+{% block level_samples %}
+
+  <p><b>Sample Input</b></p>
+  <pre>Welcome to 30 Days of Code!</pre>
+
+  <p><b>Sample Output</b></p>
+  <pre>Hello, World.
+Welcome to 30 Days of Code!</pre>
+
+  <p><b>Explanation</b></p>
+  <p>
+  On the first line, we print the string literal <code>Hello, World.</code>. On the second line, we print the contents of the <em>inputString</em> variable which, for this sample case, happens to be <code>Welcome to 30 Days of Code!</code>. If you do not print the variable's contents to stdout, you will not pass the hidden test case.
+  </p>
+{% endblock %}
+
+{% block level_code %}# your code here
+{% endblock %}
+

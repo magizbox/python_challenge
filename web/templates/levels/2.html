@@ -1,0 +1,73 @@
+{% extends "level.html" %}
+
+{% block level_title %}
+    <h1>Data Types</h1>
+{% endblock %}
+
+{% block level_objective %}
+    <p><b>Objective</b></p>
+    <p>Today, we're discussing data types. Check out the Tutorial tab for learning materials and an instructional
+        video!</p>
+{% endblock %}
+
+{% block level_task %}
+    <p><b>Task</b></p>
+    <p>Complete the code in the editor below. The variables i, d, and s are already declared and initialized for you. You must:</p>
+    <ol>
+        <li> Declare variables: one of type int, one of type double, and one of type String.</li>
+        <li> Read lines of input from stdin (according to the sequence given in the Input Format section below) and
+            initialize your 3 variables.
+        </li>
+        <li>
+            Use <code>+</code> the operator to perform the following operations:
+            <ol>
+                <li>Print the sum of plus your int variable on a new line.</li>
+                <li>Print the sum of  plus your double variable to a scale of one decimal place on a new line.</li>
+                <li>Concatenate  with the string you read as input and print the result on a new line.</li>
+            </ol>
+        </li>
+    </ol>
+{% endblock %}
+
+{% block level_input %}
+  <p><b>Input Format</b></p>
+  <p>
+    The first line contains an integer that you must sum with i. <br/>
+    The second line contains a double that you must sum with d. <br/>
+    The third line contains a string that you must concatenate with s. <br/>
+  </p>
+{% endblock %}
+
+{% block level_output %}
+  <p><b>Output Format</b></p>
+  <p>
+    Print the sum of both integers on the first line, the sum of both doubles (scaled to  decimal place) on the second line, and then the two concatenated strings on the third line.
+  </p>
+{% endblock %}
+
+{% block level_samples %}
+
+  <p><b>Sample Input</b></p>
+<pre>
+12
+4.0
+is the best place to learn and practice coding!
+</pre>
+
+  <p><b>Sample Output</b></p>
+<pre>
+16
+8.0
+HackerRank is the best place to learn and practice coding!
+</pre>
+
+  <p><b>Explanation</b></p>
+  <p>
+When we sum the integers 4 and 12, we get the integer 16. <br/>
+When we sum the floating-point numbers 4.0 and 4.0, we get 8.0.<br/>
+When we concatenate <code>HackerRank</code> with <code>is the best place to learn and practice coding!</code>, we get <code>HackerRank is the best place to learn and practice coding!.</code>
+  </p>
+{% endblock %}
+
+{% block level_code %}# your code here
+{% endblock %}

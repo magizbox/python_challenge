@@ -1,4 +1,4 @@
-{% extends "_base.html" %}
+{% extends "_level.html" %}
 
 {% block css %}
     <style type="text/css" media="screen">
@@ -13,6 +13,19 @@
             font-family: monospace;
             text-align: justify;
         }
+        pre {
+          display: block;
+          padding: 12px 12px;
+          margin: 0 0 10px;
+          font-size: 13px;
+          line-height: 1.42857143;
+          color: #333;
+          word-break: break-all;
+          word-wrap: break-word;
+          background-color: #f5f5f5;
+          border-radius: 0;
+          border: solid 0px black;
+        }
     </style>
 {% endblock %}
 
@@ -20,46 +33,19 @@
     {% block level_title %} {% endblock %}
     {% block level_objective %} {% endblock %}
     {% block level_task %} {% endblock %}
-
-    <b>Input Format</b><br/>
-
-    The first line contains an integer that you must sum with .
-    The second line contains a double that you must sum with .
-    The third line contains a string that you must concatenate with .
-
-    Output Format
-
-    Print the sum of both integers on the first line, the sum of both doubles (scaled to  decimal place) on the second
-    line, and then the two concatenated strings on the third line.
-
-    Sample Input
-
-    12
-    4.0
-    is the best place to learn and practice coding!
-    Sample Output
-
-    16
-    8.0
-    HackerRank is the best place to learn and practice coding!
-    Explanation
-
-    When we sum the integers  and , we get the integer .
-    When we sum the floating-point numbers  and , we get .
-    When we concatenate HackerRank with is the best place to learn and practice coding!, we get HackerRank is the best
-    place to learn and practice coding!.  <br/><br/>
+    {% block level_input %} {% endblock %}
+    {% block level_output %} {% endblock %}
+    {% block level_samples %} {% endblock %}
 
     <div class="text-center">
-        <div id="editor"># your code here
-            print "Hello World 2."
-        </div>
+        <div id="editor">{% block level_code %} {% endblock %}</div>
         <br/>
         <div class="text-right">
             <button id="submit-code" class="btn btn-info"><b>Submit Code</b></button>
         </div>
         <br/>
         <div id="error" class="panel panel-danger hidden"
-             style="font-size: 30px; color: #ec3956; margin: 0px 0px r0px 0px; padding: 20px;">
+             style="font-size: 30px; color: #ec3956; margin: 0px 0px 0px 0px; padding: 20px;">
             Wrong Answer
         </div>
         <div id="success" class="panel panel-success hidden" style="padding: 10px; color: #5baf14">
@@ -69,22 +55,20 @@
       You solved this challenge.
       </span>
             <div class="text-right">
-                <a class="btn btn-success" href="/level3" style="padding: 4px 10px; font-weight: bold">Next
-                    Challenge</a>
+                <a class="btn btn-success" href="/{{ level.next }}" style="padding: 4px 10px; font-weight: bold">Next Challenge</a>
             </div>
         </div>
         <div id="graduation" class="panel panel-success hidden" style="padding: 10px; color: #5baf14">
             <div style="font-size: 30px; margin: 0px 0px 10px 0px;">Congratulation!</div>
-            <br/>
+        <br/>
             <span style="font-size: 16px;">
       Now you become a <b>Python Ninja</b>.</span>
             <br/><br/>
-            <a class="btn btn-danger" href="/badge" style="padding: 4px 10px; font-weight: bold">Get your
-                badge &rarr;</a>
+            <a class="btn btn-danger" href="/badge" style="padding: 4px 10px; font-weight: bold">Get your badge &rarr;</a>
         </div>
         <br/>
     </div>
-    <script src="static/components/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../static/components/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 
 
 {% endblock %}
@@ -116,7 +100,7 @@
             var code = editor.getValue();
             var data = {
                 "code": code,
-                "problem": "level2"
+                "problem": "{{ level.id }}"
             };
             $.ajax({
                 type: "POST",
