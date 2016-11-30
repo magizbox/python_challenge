@@ -19,6 +19,10 @@ def hello():
 def level1():
     return render_template("level1.html")
 
+@app.route('/level1_answer')
+def level1_answer():
+    return render_template("level1_answer.html")
+
 
 @app.route('/level2')
 def level2():
